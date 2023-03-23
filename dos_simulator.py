@@ -11,15 +11,22 @@ def send_dht(address, port, dht, interval):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
     data = None
     if dht == 'ping':
-        data = {b'a': {b'id': b'ffffffffffffffffffff'},
+        data = {b'a': {b'id': bytes.fromhex('afea60fea601231a113dafea60fea601231a113d')},
                 b'q': b'ping',
                 b't': b'',
                 b'y': b'q'}
     elif dht == 'find_node':
-        data = {b'a': {b'id': b'ffffffffffffffffffff',
-                       b'target': b'aaaaaaaaaaaaaaaaaaaa'},
+        data = {b'a': {b'id': bytes.fromhex('afea60fea601231a113dafea60fea601231a113d'),
+                       b'target': bytes.fromhex('3c68a8e201ef8bfc4f057866d77af51a199cb227')},
                 b'q': b'find_node',
                 b't': b'',
+                b'y': b'q'}
+    elif dht == 'get_peers':
+        data = {b'a': {b'id': bytes.fromhex('afea60fea601231a113dafea60fea601231a113d'),
+                       b'info_hash': bytes.fromhex('3c68a8e201ef8bfc4f057866d77af51a199cb227')},
+                b'q': b'get_peers',
+                b't': b'',
+                b'v': bytes.fromhex('4c54012f'),
                 b'y': b'q'}
 
     while True:
